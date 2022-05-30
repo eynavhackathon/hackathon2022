@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">כולנו מדינה</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="new_immigrant">new immigrant</string>
+    <string name="volunteer">volunteer</string>
+    <string name="native_b">native</string>
+    <string name="welcome_new_immigrant">Welcome To Israel</string>
+    <string name="welcome_volunteer">Thank You For Your Help</string>
+    <string name="welcome_native_b">Lets Help Them Fit In</string>
+
+</resources>
