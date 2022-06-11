@@ -50,9 +50,7 @@ import java.util.Map;
 public class MeetAdapter extends RecyclerView.Adapter <MeetAdapter.MeetAdapterHolder> {
     List<Meet> meets;
     Context context;
-//    FusedLocationProviderClient clinet;
     static boolean test;
-//    StreamDBHelper streamDBHelperamDBHelper;
     static Boolean ifNameCity;
     String userType;
     FirebaseFirestore db;
@@ -75,9 +73,6 @@ public class MeetAdapter extends RecyclerView.Adapter <MeetAdapter.MeetAdapterHo
     @Override
     public void onBindViewHolder(@NonNull MeetAdapter.MeetAdapterHolder holder, int position) {
         Meet meet = meets.get(position);
-//        holder.tvNameTour.setText(meet.getName());
-//        holder.tvTourInformation.setText(meet.getType());
-
 
         String location = "0";
         holder.meet = meet;
@@ -103,56 +98,6 @@ public class MeetAdapter extends RecyclerView.Adapter <MeetAdapter.MeetAdapterHo
                         }
                     }
                 });
-//        TODO לבדוק אם הפגישה נמצאת אצל המשתמש ואם כן אז הלחצן יעלם
-//        if (ifNameCity){
-//            holder.tvNameCityTour.setText(tour.getCity());
-//        }
-//        if (test){
-//            location = Manifest.permission.ACCESS_FINE_LOCATION;
-//            ActivityCompat.requestPermissions(((Activity) context),new String[]{location},0);
-//            clinet = LocationServices.getFusedLocationProviderClient(context);
-//        }
-
-//        Location locationTour =new Location("locationTour");
-//        locationTour.setLatitude(tour.getY());
-//        locationTour.setLongitude(tour.getX());
-//        streamDBHelper = new StreamDBHelper(context);
-//        if ((ContextCompat.checkSelfPermission(context, location) != PackageManager.PERMISSION_GRANTED) || (!test)){
-//            ActivityCompat.requestPermissions(((Activity) context),new String[]{location},0);
-//            String nameCity = tour.getCity();
-//            String distanceString;
-//            if (nameCity != null) {
-//                if (nameCity.equals("תל אביב יפו")){
-//                    nameCity = "תל אביב";
-//                }
-//
-//                CitiesDatabase citiesDatabase = new CitiesDatabase(context);
-//                List<City> cities = citiesDatabase.getCitiesByName(nameCity);
-//                Location locationCity = new Location("locationCity");
-//                for (int i = 0; i < cities.size(); i++) {
-//                    if (cities.get(i).getX() > 0) {
-//                        locationCity.setLatitude(cities.get(i).getY());
-//                        locationCity.setLongitude(cities.get(i).getX());
-//                    }
-//                }
-//                distanceString = distance(locationTour,locationCity,tour);
-//                holder.tvDistance.setText("מרחק ממרכז העיר " + distanceString + " ק״מ ");
-//            }
-//        }
-//        else {
-//            clinet.getLastLocation().addOnSuccessListener(((Activity) context), new OnSuccessListener<Location>() {
-//                @Override
-//                public void onSuccess(Location myLocation) {
-//                    if (myLocation != null){
-//                        String distanceString = distance(myLocation,locationTour,tour);
-//                        holder.tvDistance.setText("מרחק ממקומך הנוכחי " + distanceString + " ק״מ ");
-//                        System.out.println(test);
-//
-//                    }
-//
-//                }
-//            });
-//        }
         holder.btnRegistration.setOnClickListener(l ->{
             mAuth = FirebaseAuth.getInstance();
             db = FirebaseFirestore.getInstance();
@@ -172,8 +117,6 @@ public class MeetAdapter extends RecyclerView.Adapter <MeetAdapter.MeetAdapterHo
             if (userType.equals("volunteer")){
                 washingtonRef.update("countVolunteer", FieldValue.increment(1));
             }
-//            TODO להוסיף את הפגישה למשתמש
-            System.out.println(meet);
             String placenametext = "You sign up for a meeting: "+holder.meet.getTypeMeet();
             new AlertDialog.Builder(context)
                     .setTitle("Register Meet")
@@ -189,17 +132,6 @@ public class MeetAdapter extends RecyclerView.Adapter <MeetAdapter.MeetAdapterHo
                     .show();
         });
     }
-//    private String distance(Location locationStart,Location locationEnd , Tour tour){
-//        double distance = locationStart.distanceTo(locationEnd) /1000;
-//        String distanceString = String.valueOf(distance);
-//        int distanceindexOfPoint = distanceString.indexOf(".");
-//        if (distanceString.length() >= 4){
-//            distanceString = distanceString.substring(0,distanceindexOfPoint+3);
-//        }
-//        TourMyLocationDistance tourMyLocationDistance = new TourMyLocationDistance(tour,distanceString);
-//        streamDBHelper.add(tourMyLocationDistance);
-//        return distanceString;
-//    }
     public void setTest(boolean test3){
         test = test3;
     }
