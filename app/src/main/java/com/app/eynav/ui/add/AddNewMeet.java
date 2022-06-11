@@ -118,28 +118,6 @@ public class AddNewMeet  extends Fragment implements AdapterView.OnItemSelectedL
         final Handler handler = new Handler();
         final int delay = 100; // 1000 milliseconds == 1 second
         mAuth = FirebaseAuth.getInstance();
-
-
-//        handler.postDelayed( runnable = new Runnable() {
-//            public void run() {
-//                if (placeChoose != null){
-//                    if (placeChoose.getType().equals("library")){
-//                        String [] sp = placeChoose.getNamePlace().split(",");
-//                        tvPlaceChoose.setText(sp[0]);
-//                        placeLibrariesSourceJson.cancel(true);
-//                    }else {
-//                        tvPlaceChoose.setText(placeChoose.getNamePlace());
-//                        placeSportSourceJson.cancel(true);
-//                    }
-//                    handler.removeCallbacks(runnable);
-//                    places = new ArrayList<>();
-//                    PlaceAdapter placeAdapter = new PlaceAdapter(places, getContext());
-//                    rvPlaceMeet.setAdapter(placeAdapter);
-//                }
-//                handler.postDelayed(runnable, delay);
-//            }
-//        }, delay);
-
         courses.add("support");
         courses.add("Sports - football");
         courses.add("Sports - running");
@@ -157,7 +135,6 @@ public class AddNewMeet  extends Fragment implements AdapterView.OnItemSelectedL
         ArrayAdapter adL= new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item,lang_array);
         adL.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         languageMeeting.setAdapter(adL);
-//        TODO languageMeeting
         btnHourMeet.setText(getTimeMeet());
         btnDateMeet.setText(getDateMeet());
         FirebaseUser userN = mAuth.getCurrentUser();
@@ -198,7 +175,6 @@ public class AddNewMeet  extends Fragment implements AdapterView.OnItemSelectedL
         TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
-//                String time = hourOfDay + ":" + minute;
                 calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
                 calendar.set(Calendar.MINUTE, minute);
                 SimpleDateFormat mFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
@@ -220,9 +196,6 @@ public class AddNewMeet  extends Fragment implements AdapterView.OnItemSelectedL
             timePickerDialog.show();
         });
         rvPlaceMeet.setHasFixedSize(true);
-
-//        TODO המקומות מפגש לא עולה
-//        TODO לעשות סינון של מקומות מפגש לפי סוג מפגש
         PlaceAdapter placeAdapter = new PlaceAdapter(places,getContext());
         rvPlaceMeet.setAdapter(placeAdapter);
 
@@ -234,26 +207,6 @@ public class AddNewMeet  extends Fragment implements AdapterView.OnItemSelectedL
             placeChoose = null;
             tvPlaceChoose.setText("");
         });
-
-//        reference.child(uid).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
-//            @Override
-//            public void onS(@NonNull Task<DataSnapshot> task) {
-//                if (!task.isSuccessful()) {
-//                    Log.e("firebase", "Error getting data", task.getException());
-//                }
-//                else {
-////                        DateBo
-//                    Log.d("firebase", String.valueOf(task.getResult().getValue()));
-//                }
-//            }
-//        });
-//        TODO btnDateMeet
-//        TODO btnHourMeet
-//        TODO places
-//        TODO btn_else_place
-//        TODO btnSavePlace
-
-
         btnSavePlace.setOnClickListener(l ->{
 
 
@@ -329,9 +282,6 @@ public class AddNewMeet  extends Fragment implements AdapterView.OnItemSelectedL
                     synchronized (this) {
                         try {
                             places = placeLibrariesSourceJson.doInBackground();
-//                            PlaceAdapter placeAdapter = new PlaceAdapter(places, getContext());
-//
-//                            rvPlaceMeet.setAdapter(placeAdapter);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -447,19 +397,14 @@ public class AddNewMeet  extends Fragment implements AdapterView.OnItemSelectedL
                     if (placeChoose != null) {
                         if ((placeChooseBefore == null) || (!(placeChoose.equals(placeChooseBefore) ))){
                             placeChooseBefore = placeChoose;
-                            System.out.println("kkkkkkkkkk");
-
                             if (placeChoose.getType().equals("library")) {
                                 String[] sp = placeChoose.getNamePlace().split(",");
                                 tvPlaceChoose.setText(sp[0]);
                                 placeLibrariesSourceJson.cancel(true);
-//                                placeLibrariesSourceJson.isCancelled = true;
 
                             } else {
                                 tvPlaceChoose.setText(placeChoose.getNamePlace());
                                 placeSportSourceJson.cancel(true);
-//                                placeSportSourceJson.isCancelled = true;
-
                             }
                             handler.removeCallbacks(runnable);
                             places = new ArrayList<>();
@@ -471,8 +416,6 @@ public class AddNewMeet  extends Fragment implements AdapterView.OnItemSelectedL
                 }
             }, delay);
         }
-
-//        typeMeet = courses.get(i);
         switch (typeMeet){
             case "support":
                 llMeetInfo.removeAllViews();
@@ -531,10 +474,6 @@ public class AddNewMeet  extends Fragment implements AdapterView.OnItemSelectedL
                 llMeetInfo.addView(llMeetInfoTextConditions);
                 break;
         }
-//        Toast.makeText(getContext(),
-//                        courses.get(i),
-//                        Toast.LENGTH_LONG)
-//                .show();
     }
 
     @Override
