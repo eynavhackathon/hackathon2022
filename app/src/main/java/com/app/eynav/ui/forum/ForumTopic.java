@@ -49,7 +49,6 @@ public class ForumTopic extends Fragment {
     static boolean showSendComment = false;
     static String pId = "";
     static ModeForum forum;
-//     AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
 
     public ForumTopic(ModeForum modeForum) {
         System.out.println(modeForum);
@@ -69,27 +68,6 @@ public class ForumTopic extends Fragment {
         layoutManager.setReverseLayout(true);
         recyclerView.setLayoutManager(layoutManager);
         Bundle bundle = this.getArguments();
-
-
-//        final EditText edittext = new EditText(getContext());
-//        alert.setMessage("Enter Your Message");
-//        alert.setTitle("Enter Your Title");
-//
-//        alert.setView(edittext);
-//
-//        alert.setPositiveButton("send comment", new DialogInterface.OnClickListener() {
-//            public void onClick(DialogInterface dialog, int whichButton) {
-//                String YouEditTextValue1 = edittext.getText().toString();
-//            }
-//        });
-//
-//        alert.setNegativeButton("no", new DialogInterface.OnClickListener() {
-//            public void onClick(DialogInterface dialog, int whichButton) {
-//                // what ever you want to do with No option.
-//            }
-//        });
-//
-//        alert.show();
         if (bundle != null) {
             modeForum = bundle.getParcelable(EXTRA_FORUM);
             System.out.println(modeForum);
@@ -124,8 +102,6 @@ public class ForumTopic extends Fragment {
             hashMap.put("uDp",forum.getuDp());
             hashMap.put("uName",forum.getuName());
             hashMap.put("pLiked",String.valueOf(0));
-
-
             long time= System.currentTimeMillis();
 
             ref.child(String.valueOf(time)).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -157,22 +133,13 @@ public class ForumTopic extends Fragment {
                     String uid = (String) ds.child("uid").getValue();
                     String uName = (String) ds.child("uName").getValue();
                     String pLiked = (String) ds.child("pLiked").getValue();
-
-
                     ModeForum modeForum1 = new ModeForum(pId,pTitle,pDescriptionv,"",pTime,uid, uEmail,"", uName,pLiked);
                     if (modeForum1.getpTitle().equals(modeForum.getpTitle()) && modeForum1.getpDescr().equals(modeForum.getpDescr())){
                         modeForumList.add(modeForum1);
-                        Log.e("jjjjjjj","jjjjjjjj");
-                        System.out.println(modeForum1);
                     }
-
-
                 }
                 loadComments(modeForumList);
-
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(getActivity(), ""+error.getMessage(), Toast.LENGTH_SHORT).show();
@@ -186,8 +153,6 @@ public class ForumTopic extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot ds: snapshot.getChildren()){
-                    System.out.println("jjjjkkmmmckdnkkdjd");
-                    System.out.println(ds.getValue());
                     String pDescriptionv = (String) ds.child("comment").getValue();
                     String pId = (String) ds.child("cId").getValue();
                     String pTime = (String) ds.child("timeStamp").getValue();
@@ -196,12 +161,7 @@ public class ForumTopic extends Fragment {
                     String uName = (String) ds.child("uName").getValue();
                     String uDp = (String) ds.child("uDp").getValue();
                     String pLiked = (String) ds.child("pLiked").getValue();
-
-
                     ModeForum modeForum = new ModeForum(pId,"",pDescriptionv,"",pTime,uid, uEmail,"", uName,pLiked);
-                    System.out.println("+++++++++++++");
-                    System.out.println(modeForum);
-//                    ModeForum modeForum = ds.getValue(ModeForum.class);
                     modeForumList.add(modeForum);
 
                 }
