@@ -87,44 +87,12 @@ public class AddFragment extends Fragment {
 
         fdAddMeet.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(400).start();
         fdAddMeet.setOnClickListener(l ->{
-//            Bundle bundle = new Bundle();
-//            bundle.putParcelable(MeetInfo.EXTRA_MEET, (Parcelable) meet);
-//            Fragment fragment = new AddNewMeet();
-////            fragment.setArguments(bundle);
-////            AppCompatActivity activity = (AppCompatActivity) itemView.getContext();
-//
-//            getContext().getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment_activity_main, fragment).addToBackStack(null).commit();
-//            FragmentManager fm = getSupportFragmentManager();
-//            fm.beginTransaction().replace(R.id.frameLayout,fragment2).commit();
-
-
-
-
-//            AppCompatActivity activity = (AppCompatActivity)getContext();
-//            Bundle bundle2 = new Bundle();
-//            Fragment fragment = new AddNewMeet();
-//            fragment.setArguments(bundle2);
-//            activity.getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment_activity_main, fragment).addToBackStack(null).commit();
-//            activity.getFragmentManager().beginTransaction().replace(R.id.nav_host_fragment_activity_main, fragment).addToBackStack(null).commit();
-
-//            FragmentManager fragmentManager = getChildFragmentManager();
-//            FragmentTransaction transaction = fragmentManager.beginTransaction();
-//            transaction.addToBackStack(null).replace(R.id.nav_host_fragment_activity_main, fragment);
-//            transaction.commit();
-
-
-//            AddNewMeet youTubeFragment = AddNewMeet.newInstance(youTubeFragment1.url, timeVideo);
             AppCompatActivity activity = (AppCompatActivity) root.getContext();
             Bundle bundle2 = new Bundle();
             AddNewMeet.placeChoose = null;
             Fragment fragment2 = new AddNewMeet(userType);
             fragment2.setArguments(bundle2);
             activity.getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment_activity_main, fragment2).addToBackStack(null).commit();
-//            AddNewMeet fragment1 = AddNewMeet;
-//            FragmentManager fragmentManager = getFragmentManager();
-//            FragmentTransaction transaction = fragmentManager.beginTransaction();
-//            transaction.replace(R.id.frLayout, fragment, "TAG");
-//            transaction.commit();
 
         });
         rvMeet.setHasFixedSize(true);
@@ -133,31 +101,6 @@ public class AddFragment extends Fragment {
         // Use constants provided by Java Calendar class
          mon_date = root.findViewById(R.id.mon_date);
         compactCalendarView.setFirstDayOfWeek(Calendar.SUNDAY);
-
-
-        // Query for events on Sun, 07 Jun 2015 GMT.
-        // Time is not relevant when querying for events, since events are returned by day.
-        // So you can pass in any arbitary DateTime and you will receive all events for that day.
-
-        // events has size 2 with the 2 events inserted previously
-
-        // define a listener to receive callbacks when certain events happen.
-
-//        final TextView textView = binding.textAdd;
-//        dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-
-//        CalendarView calendarView = root.findViewById(R.id.calendarView);
-//        if (calendarView != null) {
-//            calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-//                @Override
-//                public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-//                    // Note that months are indexed from 0. So, 0 means January, 1 means february, 2 means march etc.
-//                    String msg = "Selected date is " + dayOfMonth + "/" + (month + 1) + "/" + year;
-//                    Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
-//                }
-//            });
-//
-//        }
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
 
@@ -222,8 +165,6 @@ public class AddFragment extends Fragment {
                                 int countVolunteer1 = Math.toIntExact(countVolunteer);
                                 Calendar calendar = Calendar.getInstance();
                                 int year = calendar.get(Calendar.YEAR);
-//                                int month = calendar.get(Calendar.MONTH);
-//                                month = month + 1;
                                 String[] k = dateMeet.split(" ");
                                 String [] time = timeMeet.split(":");
                                 int month = 1;
@@ -340,34 +281,17 @@ public class AddFragment extends Fragment {
                                 for (int i = 0; i < meets.size(); i++) {
                                     System.out.println(meets.get(i));
                                     if (DateUtils.isSameDay(meets.get(i).getDateM(),dateClicked)){
-                                        System.out.println(i);
-//                                        rvMeet.getLayoutManager().scrollToPosition(0);
-//                                        RecyclerView.SmoothScroller smoothScroller = new
-//                                                LinearSmoothScroller(getContext()) {
-//                                                    @Override
-//                                                    protected int getVerticalSnapPreference() {
-//                                                        return LinearSmoothScroller.SNAP_TO_START;
-//                                                    }
-//                                                };
-//                                        smoothScroller.setTargetPosition(i);
-//                                        rvMeet.getLayoutManager().startSmoothScroll(smoothScroller);
                                         ((LinearLayoutManager)rvMeet.getLayoutManager()).scrollToPositionWithOffset(i,0);
-
-//                                        rvMeet.getLayoutManager().smoothScrollToPosition(i);
                                         break;
                                     }
 
                                 }
                                 List<Event> events = compactCalendarView.getEvents(dateClicked);
-//                                System.out.println(events);
                                 List<String> dates = new ArrayList<>();
                                 String date = (String) mon_date.getText();
 
                                 if (date.length() > 2){
                                     try {
-//                                    Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(date);
-//                                        rvMeet.getLayoutManager().scrollToPosition(2);
-
                                         Date date1= dateFormat.parse(date);
                                         System.out.println(date1);
                                         for (Event e : compactCalendarView.getEventsForMonth(date1)) {
@@ -383,8 +307,6 @@ public class AddFragment extends Fragment {
                                     }
 
                                 }else {
-//                                    rvMeet.getLayoutManager().scrollToPosition(0);
-
                                     for (Event e : compactCalendarView.getEventsForMonth(new Date())) {
                                         dates.add(dateFormatday.format(e.getTimeInMillis()));
                                         if (dateFormatday.format(e.getTimeInMillis()).toString().contains("18-JUN-2022")){
@@ -394,19 +316,6 @@ public class AddFragment extends Fragment {
                                     System.out.println(dates);
 
                                 }
-//                                Date date1 =  dateFormat.format(date);
-
-//                                Date date1= dateFormat.parse(date);
-
-
-
-//                if (dateClicked.toString().compareTo("Fri Oct 21 09:00:00 AST 2022") == 0){
-//                    Toast.makeText(getContext(), "eventjjdlldlddd", Toast.LENGTH_SHORT).show();
-//                }else {
-//                    Toast.makeText(getContext(), "noevent", Toast.LENGTH_SHORT).show();
-//
-//                }
-                            }
 
                             @Override
                             public void onMonthScroll(Date firstDayOfNewMonth) {
