@@ -39,7 +39,6 @@ import java.util.Locale;
 public class ForumTopicAdapter extends RecyclerView.Adapter <ForumTopicAdapter.ForumTopicAdapterHolder> {
     List<ModeForum> modeForums;
     Context context;
-//    FusedLocationProviderClient clinet;
     static boolean test;
     DatabaseReference likesRef;
     DatabaseReference forumsRef;
@@ -131,99 +130,15 @@ public class ForumTopicAdapter extends RecyclerView.Adapter <ForumTopicAdapter.F
 
                 }
             });
-            Toast.makeText(context, "Like", Toast.LENGTH_SHORT).show();
 
         });
         holder.commentBtn.setOnClickListener(l ->{
-//            alert.show();
-
-            Toast.makeText(context, "comment", Toast.LENGTH_SHORT).show();
             ForumTopic.showSendComment = true;
             ForumTopic.rlSendComment.setVisibility(View.VISIBLE);
             ForumTopic.forum = modeForum;
             ForumTopic.pId = modeForum.getpId();
         });
-
-//        holder.tvNameTour.setText(meet.getName());
-//        holder.tvTourInformation.setText(meet.getType());
-//            String location = "0";
-//
-//            if (place.getType().equals("library")){
-//                String [] sp = place.getNamePlace().split(",");
-//                holder.tvMeetNamePlace.setText(sp[0]);
-//            }else {
-//                holder.tvMeetNamePlace.setText(place.getNamePlace());
-//            }
-//            holder.tvPlaceAddress.setText(place.getNameEng());
-//        holder.btnChoice.setOnClickListener(l ->{
-//            AddNewMeet.placeChoose = place;
-//
-//            String placenametext = "You have selected the place: "+holder.tvMeetNamePlace.getText();
-//            new AlertDialog.Builder(context)
-//                    .setTitle("Choice Place")
-//                    .setMessage(placenametext)
-//                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            dialog.cancel();
-//
-//                        }
-//                    })
-//                    .setNegativeButton(android.R.string.no, null)
-//                    .setIcon(android.R.drawable.ic_input_add)
-//                    .show();
-//        });
-////        placeChoose
-
-
-//        if (ifNameCity){
-//            holder.tvNameCityTour.setText(tour.getCity());
-//        }
-//        if (test){
-//            location = Manifest.permission.ACCESS_FINE_LOCATION;
-//            ActivityCompat.requestPermissions(((Activity) context),new String[]{location},0);
-//            clinet = LocationServices.getFusedLocationProviderClient(context);
-//        }
-
-//        Location locationTour =new Location("locationTour");
-//        locationTour.setLatitude(tour.getY());
-//        locationTour.setLongitude(tour.getX());
-//        streamDBHelper = new StreamDBHelper(context);
-//        if ((ContextCompat.checkSelfPermission(context, location) != PackageManager.PERMISSION_GRANTED) || (!test)){
-//            ActivityCompat.requestPermissions(((Activity) context),new String[]{location},0);
-//            String nameCity = tour.getCity();
-//            String distanceString;
-//            if (nameCity != null) {
-//                if (nameCity.equals("תל אביב יפו")){
-//                    nameCity = "תל אביב";
-//                }
-//
-//                CitiesDatabase citiesDatabase = new CitiesDatabase(context);
-//                List<City> cities = citiesDatabase.getCitiesByName(nameCity);
-//                Location locationCity = new Location("locationCity");
-//                for (int i = 0; i < cities.size(); i++) {
-//                    if (cities.get(i).getX() > 0) {
-//                        locationCity.setLatitude(cities.get(i).getY());
-//                        locationCity.setLongitude(cities.get(i).getX());
-//                    }
-//                }
-//                distanceString = distance(locationTour,locationCity,tour);
-//                holder.tvDistance.setText("מרחק ממרכז העיר " + distanceString + " ק״מ ");
-//            }
-//        }
-//        else {
-//            clinet.getLastLocation().addOnSuccessListener(((Activity) context), new OnSuccessListener<Location>() {
-//                @Override
-//                public void onSuccess(Location myLocation) {
-//                    if (myLocation != null){
-//                        String distanceString = distance(myLocation,locationTour,tour);
-//                        holder.tvDistance.setText("מרחק ממקומך הנוכחי " + distanceString + " ק״מ ");
-//                        System.out.println(test);
-//
-//                    }
-//
-//                }
-//            });
-//        }
+  
     }
 
     private void loadUserInfo(ForumTopicAdapterHolder holder) {
@@ -258,12 +173,8 @@ public class ForumTopicAdapter extends RecyclerView.Adapter <ForumTopicAdapter.F
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.child(forumKey).hasChild(myUid)){
                     holder.likeBtn.setImageResource(R.drawable.ic_action_liked);
-                    Log.e("Liked","Liked");
                 }else {
                     holder.likeBtn.setImageResource(R.drawable.ic_action_like);
-                    Log.e("no","no");
-
-
                 }
             }
 
@@ -274,21 +185,9 @@ public class ForumTopicAdapter extends RecyclerView.Adapter <ForumTopicAdapter.F
         });
     }
 
-    //    private String distance(Location locationStart,Location locationEnd , Tour tour){
-//        double distance = locationStart.distanceTo(locationEnd) /1000;
-//        String distanceString = String.valueOf(distance);
-//        int distanceindexOfPoint = distanceString.indexOf(".");
-//        if (distanceString.length() >= 4){
-//            distanceString = distanceString.substring(0,distanceindexOfPoint+3);
-//        }
-//        TourMyLocationDistance tourMyLocationDistance = new TourMyLocationDistance(tour,distanceString);
-//        streamDBHelper.add(tourMyLocationDistance);
-//        return distanceString;
-//    }
     @Override
     public int getItemCount() {
         return modeForums.size();
-//        return 2;
 
     }
 
@@ -299,10 +198,8 @@ public class ForumTopicAdapter extends RecyclerView.Adapter <ForumTopicAdapter.F
         ImageButton moreBtn;
         ImageButton likeBtn, commentBtn;
         ModeForum modeForum;
-//TODO btnChoice
         public ForumTopicAdapterHolder(@NonNull View itemView) {
             super(itemView);
-//            uPictureIv = itemView.findViewById(R.id.);
             pImageIv = itemView.findViewById(R.id.pImageIv);
             uNameTv = itemView.findViewById(R.id.uNameTv);
             pTimeTv = itemView.findViewById(R.id.pTimeTv);
@@ -312,16 +209,6 @@ public class ForumTopicAdapter extends RecyclerView.Adapter <ForumTopicAdapter.F
             moreBtn = itemView.findViewById(R.id.moreBtn);
             likeBtn = itemView.findViewById(R.id.likeBtn);
             commentBtn = itemView.findViewById(R.id.commentBtn);
-
-//            itemView.setOnClickListener((v) -> {
-//                Bundle bundle = new Bundle();
-//                bundle.putParcelable(MeetInfo.EXTRA_MEET, (Parcelable) meet);
-//                Fragment fragment = new MeetInfo();
-//                fragment.setArguments(bundle);
-//                AppCompatActivity activity = (AppCompatActivity) itemView.getContext();
-//                activity.getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment_activity_main, fragment).addToBackStack(null).commit();
-//            });
-
 
         }
 
