@@ -34,14 +34,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
-//import com.android.volley.Request;
-//import com.android.volley.RequestQueue;
-//import com.android.volley.Response;
-//import com.android.volley.VolleyError;
-//import com.android.volley.toolbox.JsonArrayRequest;
-//import com.android.volley.toolbox.JsonObjectRequest;
-//import com.android.volley.toolbox.StringRequest;
-//import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -54,12 +46,6 @@ import okhttp3.Call;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-
-
-
-//import com.squareup.okhttp.OkHttpClient;
-//import com.squareup.okhttp.Request;
-//import com.squareup.okhttp.Response;
 
 import java.util.Calendar;
 import java.util.Collections;
@@ -98,7 +84,6 @@ public class SignupTabFragment extends Fragment implements AdapterView.OnItemSel
     };
     boolean [] selectedLang;
     ArrayList<Integer> langList = new ArrayList<>();
-//    String [] courses = { "city"};
     ArrayList<String> courses = new ArrayList<>();
     ArrayList<City> cities = new ArrayList<>();
 
@@ -139,16 +124,10 @@ public class SignupTabFragment extends Fragment implements AdapterView.OnItemSel
         btn_signup.animate().translationX(0).alpha(1).setDuration(800).setStartDelay(700).start();
         btnDateBo = root.findViewById(R.id.btnDateBo);
          spino = root.findViewById(R.id.city);
-//        sYear = root.findViewById(R.id.sYear);
-//        sMo = root.findViewById(R.id.sMo);
-//        sDay = root.findViewById(R.id.sDay);
         spino.setOnItemSelectedListener(this);
         ArrayAdapter ad= new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item,courses);
         ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spino.setAdapter(ad);
-//        sYear.setOnItemSelectedListener(this);
-//        sMo.setOnItemSelectedListener(this);
-//        sDay.setOnItemSelectedListener(this);
         mAuth = FirebaseAuth.getInstance();
 
         progressDialog = new ProgressDialog(getContext());
@@ -189,16 +168,6 @@ public class SignupTabFragment extends Fragment implements AdapterView.OnItemSel
             }
 
         });
-
-//        ArrayAdapter adsYear= new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item,courses);
-//        adsYear.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        sYear.setAdapter(adsYear);
-//        ArrayAdapter adsMo= new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item,courses);
-//        adsMo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        sMo.setAdapter(adsMo);
-//        ArrayAdapter adsDay= new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item,courses);
-//        adsDay.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        sDay.setAdapter(adsDay);
 
         btnDateBo.setText(getDateBo());
         DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
@@ -306,36 +275,11 @@ public class SignupTabFragment extends Fragment implements AdapterView.OnItemSel
             }
         }).start();
 
-
-//        InputStream is = getResources().openRawResource(R.raw.city);
-//        BufferedReader reader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
-//        String line = "";
-//        try {
-//            reader.readLine();
-//            while ((line = reader.readLine()) != null) {
-//                Log.d("MyActivity","Line: " + line);
-//                // use comma as separator columns of CSV
-//                String[] tokens = line.split(",");
-//                System.out.println(tokens[2]);
-//                if (tokens[2].length() > 3){
-//                    courses.add(tokens[2]);
-//                }
-//            }
-//
-//        } catch (IOException e) {
-//            Log.wtf("MyActivity", "Error reading data file on line" + line, e);
-//            e.printStackTrace();
-//        }
-
         return root;
     }
 
     private void registerUser(String email, String password, City chooseCity, String full_name, ArrayList<String> langChoose, String btnDateBo, String userType, String origin_country, String year_immigration, String hobbies) {
             //email and password is valid, show progress dialog and start registering user
-
-//        if (userType.equals("new_immigrant")){
-//            System.out.println(origin_country.getText());
-//            System.out.println(year_immigration.getText());
         System.out.println(getActivity());
         progressDialog.show();
             mAuth.createUserWithEmailAndPassword(email, password)
