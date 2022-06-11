@@ -43,21 +43,8 @@ public class ForumFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-//        ForumViewModel dashboardViewModel =
-//                new ViewModelProvider(this).get(ForumViewModel.class);
         View view = inflater.inflate(R.layout.fragment_forum, container, false);
-
-//        binding = FragmentForumBinding.inflate(inflater, container, false);
-//        View root = binding.getRoot();
-//
-//        final TextView textView = binding.textForum;
-//        dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-//        bundle2.putParcelable(MeetInfo.EXTRA_MEET, meet);
         AppCompatActivity activity = (AppCompatActivity) view.getContext();
-//        Bundle bundle2 = new Bundle();
-//        Fragment fragment2 = new ForumTopic();
-//        fragment2.setArguments(bundle2);
-//        activity.getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment_activity_main, fragment2).addToBackStack(null).commit();
         rvForum = view.findViewById(R.id.rvForum);
         fbAddForum = view.findViewById(R.id.fbAddForum);
         ForumAdapter meetsAdapter = new ForumAdapter(modeForums,userType,getContext());
@@ -94,7 +81,6 @@ public class ForumFragment extends Fragment {
                     String like = (String) ds.child("pLiked").getValue();
 
                     ModeForum modeForum = new ModeForum(pId,pTitle,pDescriptionv,"",pTime,uid, uEmail,"", uName,like);
-//                    ModeForum modeForum = ds.getValue(ModeForum.class);
                     modeForumList.add(modeForum);
                     forumAdapter = new ForumAdapter(modeForumList,"", getActivity());
                     rvForum.setAdapter(forumAdapter);
